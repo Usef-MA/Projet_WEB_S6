@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maroc Runner - Tutoriel</title>
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/tutorial.css">
+</head>
+<body>
+
+    <!-- Étoiles décoratives -->
+    <div class="star star-1"></div>
+    <div class="star star-2"></div>
+    <div class="star star-3"></div>
+    <div class="star star-4"></div>
+    <div class="star star-5"></div>
+    <div class="star star-6"></div>
+    <div class="star star-7"></div>
+    <div class="star star-8"></div>
+
+    <!-- Croissants décoratifs -->
+    <div class="crescent crescent-1"></div>
+    <div class="crescent crescent-2"></div>
+    <div class="crescent crescent-3"></div>
+    <div class="crescent crescent-4"></div>
+    <div class="crescent crescent-5"></div>
+    <div class="crescent crescent-6"></div>
+    
+    <!-- Bouton retour -->
+    <button class="back-btn" onclick="window.location.href='menu.html'">
+        <span class="back-icon">←</span> Menu
+    </button>
+
+    <!-- Contenu du tutoriel -->
+    <div class="tutorial-container">
+        <h1 class="tutorial-title">Comment Jouer ?</h1>
+
+        <!-- Saut Normal -->
+        <div class="tutorial-section">
+            <h2>Saut Normal</h2>
+            <div class="tutorial-content">
+                <div class="tutorial-text">
+                    <p>Appuie rapidement sur <span class="tutorial-key">ESPACE</span> pour effectuer un saut classique.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saut Chargé -->
+        <div class="tutorial-section">
+            <h2>Saut Chargé</h2>
+            <div class="tutorial-content">
+                <div class="tutorial-text">
+                    <p>Maintiens <span class="tutorial-key">ESPACE</span> enfoncé, puis relâche pour sauter plus haut !</p>
+                    <span class="action-indicator">Plus tu charges, plus tu sautes haut !</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bouclier de Protection -->
+        <div class="tutorial-section">
+            <h2>Bouclier de Protection</h2>
+            <div class="tutorial-content">
+                <div class="tutorial-text">
+                    <p>Traverse le <strong class="portal-text">portail bleu</strong> pour activer un bouclier magique.</p>
+                    <span class="action-indicator">Le bouclier absorbe 1 collision !</span>
+                </div>
+                <div class="tutorial-visual">
+                    <img src="assets/imagebouclier.png" class="shield-demo" alt="bouclier">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

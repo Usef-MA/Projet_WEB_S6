@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "MarocRunner/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "SoukDash/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/MarocRunner/(.*)",
+      "dest": "/MarocRunner/$1"
+    },
+    {
+      "src": "/SoukDash/(.*)",
+      "dest": "/SoukDash/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ]
+}

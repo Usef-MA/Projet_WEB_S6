@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maroc Runner - Paramètres</title>
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/options.css">
+</head>
+<body>
+
+    <!-- Étoiles décoratives -->
+    <div class="star star-1"></div>
+    <div class="star star-2"></div>
+    <div class="star star-3"></div>
+    <div class="star star-4"></div>
+    <div class="star star-5"></div>
+    <div class="star star-6"></div>
+    <div class="star star-7"></div>
+    <div class="star star-8"></div>
+
+    <!-- Croissants décoratifs -->
+    <div class="crescent crescent-1"></div>
+    <div class="crescent crescent-2"></div>
+    <div class="crescent crescent-3"></div>
+    <div class="crescent crescent-4"></div>
+    <div class="crescent crescent-5"></div>
+    <div class="crescent crescent-6"></div>
+    
+    <!-- Bouton retour -->
+    <button class="back-btn" onclick="window.location.href='menu.html'">
+        <span class="back-icon">←</span> Menu
+    </button>
+
+    <!-- Contenu des paramètres -->
+    <div class="options-container">
+        <h1 class="options-title">⚙️ Paramètres</h1>
+
+        <!-- Section Audio -->
+        <div class="options-section">
+            <h2>🔊 Audio</h2>
+
+            <!-- Mute général -->
+            <div class="option-item">
+                <div class="option-info">
+                    <span class="option-label">Musique et sons</span>
+                    <span class="option-status" id="mute-status">Activés</span>
+                </div>
+                <button class="toggle-btn" id="mute-toggle" onclick="toggleMute()">
+                    <span class="toggle-icon" id="mute-icon">🔊</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="./js/config/options.js"></script>
+
+</body>
+</html>

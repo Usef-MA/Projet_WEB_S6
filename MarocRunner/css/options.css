@@ -1,0 +1,130 @@
+/* === Container Principal === */
+.options-container {
+    max-width: 500px;
+    margin: 120px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #d4af37;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+.options-title {
+    text-align: center;
+    font-size: 36px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    font-family: 'Exo 2', Arial, sans-serif;
+}
+
+/* === Sections === */
+.options-section {
+    padding: 20px;
+    background: rgba(74, 26, 74, 0.4);
+    border-radius: 12px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.options-section h2 {
+    color: #d4af37;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Exo 2', Arial, sans-serif;
+    text-align: center;
+}
+
+/* === Options Items === */
+.option-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.option-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-label {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.option-status {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* === Bouton Toggle === */
+.toggle-btn {
+    background: linear-gradient(145deg, #3a3a3a, #1a1a1a);
+    border: 2px solid #d4af37;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 0 #8b6f47, 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 0 #8b6f47, 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.toggle-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #8b6f47, 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-icon {
+    font-size: 35px;
+}
+
+.toggle-btn.muted {
+    background: linear-gradient(145deg, #8b1a1a, #4a0a0a);
+    border-color: #e74c3c;
+}
+
+.toggle-btn.muted .toggle-icon {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .options-container {
+        margin: 80px 20px;
+        padding: 20px;
+    }
+
+    .options-title {
+        font-size: 28px;
+    }
+
+    .options-section h2 {
+        font-size: 20px;
+    }
+
+    .option-item {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}

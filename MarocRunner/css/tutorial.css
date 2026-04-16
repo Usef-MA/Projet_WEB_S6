@@ -1,0 +1,147 @@
+/* === Container Principal === */
+.tutorial-container {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #d4af37;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+.tutorial-title {
+    text-align: center;
+    font-size: 36px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    font-family: 'Exo 2', Arial, sans-serif;
+}
+
+/* === Sections du Tutoriel === */
+.tutorial-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(74, 26, 74, 0.4);
+    border-radius: 12px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+}
+
+.tutorial-section h2 {
+    color: #d4af37;
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-family: 'Exo 2', Arial, sans-serif;
+}
+
+/* === Layout du Contenu === */
+.tutorial-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.tutorial-text {
+    flex: 1;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.tutorial-text p {
+    margin: 0 0 8px 0;
+}
+
+/* === Touches du Clavier === */
+.tutorial-key {
+    display: inline-block;
+    background: linear-gradient(145deg, #3a3a3a, #1a1a1a);
+    color: #d4af37;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: 2px solid #d4af37;
+    box-shadow: 0 3px 0 #8b6f47, 0 5px 10px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    margin: 0 3px;
+}
+
+/* === Visuels === */
+.tutorial-visual {
+    width: 120px;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    flex-shrink: 0;
+}
+
+.tutorial-visual img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.action-indicator {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    margin-top: 8px;
+}
+
+/* === Animation du Bouclier === */
+.shield-demo {
+    animation: shield-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shield-pulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.5));
+        transform: scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px rgba(0, 200, 255, 1));
+        transform: scale(1.05);
+    }
+}
+
+/* === Style du Portail === */
+.portal-text {
+    color: #00ccff;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .tutorial-container {
+        margin: 50px 20px;
+        padding: 20px;
+    }
+
+    .tutorial-title {
+        font-size: 28px;
+    }
+
+    .tutorial-section h2 {
+        font-size: 20px;
+    }
+
+    .tutorial-text {
+        font-size: 14px;
+    }
+
+    .tutorial-visual {
+        width: 100px;
+        height: 100px;
+    }
+}
