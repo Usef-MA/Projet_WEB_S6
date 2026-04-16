@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AARO GAMING - L'Univers des Jeux Immersifs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particules de fond -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="location.reload()">
+                <img src="assets/images/logo.png" alt="AARO Gaming" class="logo-img">
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#products" class="nav-link">PRODUITS</a></li>
+                <li><a href="#innovations" class="nav-link">INNOVATIONS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+
+            <!-- Nav droite : bouton connexion OU infos utilisateur -->
+            <div class="nav-auth" id="navAuth">
+                <button class="btn-login" id="btnLogin">SE CONNECTER</button>
+            </div>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Héro -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line"><span class="moroccan-star">✦</span>AARO</span>
+                    <span class="title-line highlight">GAMING</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="hero-arabic">عالم الألعاب المغربية</span>
+                    Plongez dans l'univers des jeux marocains — runner frénétique,
+                    souk animé et classements en ligne.
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <span class="feature-number">01</span>
+                        <span class="feature-text">Runner frénétique dans les paysages marocains</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-number">02</span>
+                        <span class="feature-text">Classements en ligne et scores sauvegardés</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-number">03</span>
+                        <span class="feature-text">Traversez les souks dans ce Frogger marocain</span>
+                    </div>
+                </div>
+
+                <button class="btn-explore" id="exploreBtn">
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-text">EXPLORER L'UNIVERS</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+
+            <div class="hero-visual">
+                <img src="assets/images/avatar.png" alt="Avatar gamer" class="character-avatar">
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Section Produits -->
+    <section id="products" class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">NOS UNIVERS</h2>
+            <p class="section-subtitle">Trois mondes, trois expériences uniques</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Jeu 1 : Maroc Runner -->
+            <div class="game-card" data-game="1">
+                <div class="card-glow"></div>
+                <div class="card-image">
+                    <img src="assets/images/marocrunner-cover.png" alt="Maroc Runner" class="game-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="game-placeholder game-1" style="display:none">
+                        <div class="game-icon">🏃</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">MAROC RUNNER</h3>
+                    <p class="game-description">
+                        Courrez à travers les paysages marocains dans ce runner frénétique.
+                        Évitez les obstacles, montez en niveau et battez le meilleur score.
+                    </p>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">GENRE</span>
+                            <span class="stat-value">Runner</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">JOUEURS</span>
+                            <span class="stat-value">Solo</span>
+                        </div>
+                    </div>
+                    <div class="card-buttons">
+                        <button class="btn-play" data-game-id="marocrunner" data-game-url="../MarocRunner/menu.html">
+                            <span>JOUER</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button class="btn-scores" data-game-id="marocrunner" data-game-name="Maroc Runner">
+                            SCORES
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jeu 2 : Legends Arise -->
+            <div class="game-card" data-game="2">
+                <div class="card-glow"></div>
+                <div class="card-image">
+                    <img src="assets/images/legends-cover.png" alt="Legends Arise" class="game-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="game-placeholder game-2" style="display:none">
+                        <div class="game-icon">⚔️</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">LEGENDS ARISE</h3>
+                    <p class="game-description">
+                        Combattez dans des arènes épiques où seuls les meilleurs survivent.
+                        Maîtrisez des combos dévastateurs et devenez une légende.
+                    </p>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">GENRE</span>
+                            <span class="stat-value">Combat</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">JOUEURS</span>
+                            <span class="stat-value">1v1 / 2v2</span>
+                        </div>
+                    </div>
+                    <div class="card-buttons">
+                        <button class="btn-play" data-game-id="legends">
+                            <span>JOUER</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button class="btn-scores" data-game-id="legends" data-game-name="Legends Arise">
+                            SCORES
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jeu 3 : Souk Dash -->
+            <div class="game-card" data-game="3">
+                <div class="card-glow"></div>
+                <div class="card-image">
+                    <img src="assets/images/soukdash-cover.png" alt="Souk Dash" class="game-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="game-placeholder game-3" style="display:none">
+                        <div class="game-icon">🏪</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="game-title">SOUK DASH</h3>
+                    <p class="game-description">
+                        Traversez les ruelles animées d'une médina marocaine.
+                        Évitez charrettes, motos et porteurs sur 3 niveaux de difficulté croissante.
+                    </p>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">GENRE</span>
+                            <span class="stat-value">Arcade</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">JOUEURS</span>
+                            <span class="stat-value">Solo</span>
+                        </div>
+                    </div>
+                    <div class="card-buttons">
+                        <button class="btn-play" data-game-id="soukdash" data-game-url="../SoukDash/index.html">
+                            <span>JOUER</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button class="btn-scores" data-game-id="soukdash" data-game-name="Souk Dash">
+                            SCORES
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos du projet -->
+    <section id="innovations" class="innovations-section">
+        <div class="innovations-content">
+            <h2 class="section-title">CE QU'ON A CONSTRUIT</h2>
+            <div class="innovations-grid">
+                <div class="innovation-item">
+                    <div class="innovation-icon">🎮</div>
+                    <h3>Jeux en HTML5 Canvas</h3>
+                    <p>Des jeux jouables directement dans le navigateur, sans installation, développés en JavaScript vanilla</p>
+                </div>
+                <div class="innovation-item">
+                    <div class="innovation-icon">🔐</div>
+                    <h3>Auth JWT + MongoDB</h3>
+                    <p>Système de compte sécurisé avec tokens JWT et base de données MongoDB Atlas dans le cloud</p>
+                </div>
+                <div class="innovation-item">
+                    <div class="innovation-icon">🏆</div>
+                    <h3>Leaderboards en ligne</h3>
+                    <p>Les scores sont sauvegardés côté serveur et consultables par tous les joueurs en temps réel</p>
+                </div>
+                <div class="innovation-item">
+                    <div class="innovation-icon">🇲🇦</div>
+                    <h3>Identité marocaine</h3>
+                    <p>Des univers inspirés du Maroc — médina, runner, couleurs chaudes — pour une expérience culturelle unique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="section-title">CONTACTEZ-NOUS</h2>
+                <p class="contact-description">
+                    Une question ? Une suggestion ? Notre équipe est à votre écoute pour créer
+                    ensemble l'avenir du gaming immersif.
+                </p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <span class="detail-icon">📧</span>
+                        <span>contact@aarogaming.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-icon">🌍</span>
+                        <span>Valbonne, France</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-icon">⏰</span>
+                        <span>Lun-Ven: 9h-18h</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" required placeholder=" ">
+                    <label for="name">Nom complet</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="subject" required placeholder=" ">
+                    <label for="subject">Sujet</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="5" required placeholder=" "></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <span>ENVOYER</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">AARO GAMING</div>
+            <p class="footer-text">© 2026 AARO Gaming. Tous droits réservés.</p>
+            <div class="footer-social">
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Discord</a>
+                <a href="#" class="social-link">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Vidéo -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" data-modal="videoModal">&times;</span>
+            <h3 class="modal-title">DÉCOUVREZ L'UNIVERS D'AARO</h3>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <p>Vidéo de présentation (30 secondes)</p>
+                    <p class="video-note">À intégrer prochainement</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login/Register -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content login-modal">
+            <span class="modal-close" data-modal="loginModal">&times;</span>
+            <h3 class="modal-title" id="authTitle">CONNEXION</h3>
+
+            <!-- Message d'erreur/succès -->
+            <div id="authMessage" class="auth-message" style="display:none"></div>
+
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="loginEmail" required placeholder=" ">
+                    <label for="loginEmail">Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" required placeholder=" ">
+                    <label for="loginPassword">Mot de passe</label>
+                </div>
+                <button type="submit" class="btn-submit" id="loginSubmitBtn">
+                    <span>SE CONNECTER</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                <p class="form-footer">
+                    Pas encore de compte ? <a href="#" id="switchToRegister">Créer un compte</a>
+                </p>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="registerPrenom" required placeholder=" ">
+                    <label for="registerPrenom">Prénom</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="registerNom" required placeholder=" ">
+                    <label for="registerNom">Nom</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="registerEmail" required placeholder=" ">
+                    <label for="registerEmail">Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="registerPassword" required minlength="6" placeholder=" ">
+                    <label for="registerPassword">Mot de passe (min. 6 caractères)</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="registerConfirmPassword" required minlength="6" placeholder=" ">
+                    <label for="registerConfirmPassword">Confirmer le mot de passe</label>
+                </div>
+                <button type="submit" class="btn-submit" id="registerSubmitBtn">
+                    <span>CRÉER UN COMPTE</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                <p class="form-footer">
+                    Déjà un compte ? <a href="#" id="switchToLogin">Se connecter</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Leaderboard -->
+    <div id="leaderboardModal" class="modal">
+        <div class="modal-content leaderboard-modal">
+            <span class="modal-close" data-modal="leaderboardModal">&times;</span>
+            <h3 class="modal-title" id="leaderboardTitle">CLASSEMENT</h3>
+            <div id="leaderboardContent" class="leaderboard-content">
+                <div class="leaderboard-loading">Chargement...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
