@@ -319,18 +319,18 @@ body::after {
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     overflow: hidden;
-    margin-right: -2rem;
+    margin-right: 0;
 }
 .hero-visual::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at right center, transparent 35%, var(--dark) 80%),
-        linear-gradient(to right, var(--dark) 0%, transparent 22%),
-        linear-gradient(to bottom, var(--dark) 0%, transparent 12%, transparent 85%, var(--dark) 100%);
+        radial-gradient(ellipse 80% 90% at center, transparent 30%, var(--dark) 75%),
+        linear-gradient(to right, var(--dark) 0%, transparent 20%, transparent 80%, var(--dark) 100%),
+        linear-gradient(to bottom, var(--dark) 0%, transparent 15%, transparent 82%, var(--dark) 100%);
     pointer-events: none;
     z-index: 3;
 }
@@ -338,11 +338,12 @@ body::after {
     position: relative;
     z-index: 2;
     width: auto;
-    height: 100%;
-    max-height: 90vh;
+    height: 72vh;
+    max-height: 72vh;
+    max-width: 90%;
     object-fit: contain;
-    object-position: right center;
-    filter: drop-shadow(0 0 30px rgba(212,175,55,0.15));
+    object-position: center center;
+    filter: drop-shadow(0 0 40px rgba(212,175,55,0.2));
     mix-blend-mode: screen;
 }
 
