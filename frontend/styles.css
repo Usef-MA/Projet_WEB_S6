@@ -328,8 +328,7 @@ body::after {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 90% at center, transparent 30%, var(--dark) 75%),
-        linear-gradient(to right, var(--dark) 0%, transparent 20%, transparent 80%, var(--dark) 100%),
+        linear-gradient(to right, var(--dark) 0%, transparent 25%, transparent 75%, var(--dark) 100%),
         linear-gradient(to bottom, var(--dark) 0%, transparent 15%, transparent 82%, var(--dark) 100%);
     pointer-events: none;
     z-index: 3;
@@ -343,7 +342,7 @@ body::after {
     max-width: 90%;
     object-fit: contain;
     object-position: center center;
-    filter: drop-shadow(0 0 40px rgba(212,175,55,0.2));
+    filter: brightness(1.15) contrast(1.1);
     mix-blend-mode: screen;
 }
 
