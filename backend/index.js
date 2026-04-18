@@ -10,24 +10,8 @@ const port = process.env.PORT || 4000;
 const JWT_SECRET = process.env.JWT_SECRET || "aaro_gaming_secret_2026";
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
-const ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    "http://localhost:3000",
-    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : [])
-];
-
-app.use(cors({
-    origin: (origin, callback) => {
-        // Autoriser les requêtes sans origin (ex: curl, Postman, même domaine)
-        if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error(`CORS bloqué : origine non autorisée (${origin})`));
-        }
-    },
-    credentials: true
-}));
+// origin: true reflète l'origine demandée — compatible avec credentials JWT (Authorization header)
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
 // ─── MongoDB ─────────────────────────────────────────────────────────────────
@@ -133,6 +117,21 @@ app.post("/scores", authRequired, async (req, res) => {
     }
 });
 
+// Scores personnels — DOIT être avant /scores/:jeu sinon Express capture "me" comme :jeu
+app.get("/scores/me", authRequired, async (req, res) => {
+    try {
+        const scores = await Score.aggregate([
+            { $match: { user_id: new mongoose.Types.ObjectId(req.user.id) } },
+            { $group: { _id: "$jeu", bestScore: { $max: "$score" }, count: { $sum: 1 } } },
+            { $sort: { bestScore: -1 } },
+            { $project: { _id: 0, jeu: "$_id", bestScore: 1, count: 1 } }
+        ]);
+        res.json(scores);
+    } catch (err) {
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
 // Leaderboard : meilleur score par joueur pour un jeu donné
 app.get("/scores/:jeu", async (req, res) => {
     try {
@@ -152,21 +151,6 @@ app.get("/scores/:jeu", async (req, res) => {
             { $project: { _id: 0, prenom: 1, nom: 1, score: 1 } }
         ]);
         res.json(leaderboard);
-    } catch (err) {
-        res.status(500).json({ error: "Erreur serveur" });
-    }
-});
-
-// Scores personnels : meilleur score par jeu pour l'utilisateur connecté
-app.get("/scores/me", authRequired, async (req, res) => {
-    try {
-        const scores = await Score.aggregate([
-            { $match: { user_id: new mongoose.Types.ObjectId(req.user.id) } },
-            { $group: { _id: "$jeu", bestScore: { $max: "$score" }, count: { $sum: 1 } } },
-            { $sort: { bestScore: -1 } },
-            { $project: { _id: 0, jeu: "$_id", bestScore: 1, count: 1 } }
-        ]);
-        res.json(scores);
     } catch (err) {
         res.status(500).json({ error: "Erreur serveur" });
     }
