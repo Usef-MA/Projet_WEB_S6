@@ -195,7 +195,6 @@ function updateNavAuth() {
                 </button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" id="btnChangePassword">🔑 Modifier mon mot de passe</button>
-                    <button class="dropdown-item" id="btnMyScores">🏆 Mes scores</button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item dropdown-item--danger" id="btnLogout">🚪 Se déconnecter</button>
                 </div>
@@ -210,10 +209,6 @@ function updateNavAuth() {
             document.getElementById('changePasswordForm').reset();
             document.getElementById('changePwdMessage').style.display = 'none';
             openModal('changePasswordModal');
-        });
-        document.getElementById('btnMyScores').addEventListener('click', () => {
-            document.getElementById('userDropdown').classList.remove('open');
-            openMyScoresModal();
         });
         document.getElementById('btnLogout').addEventListener('click', () => {
             authManager.logout();
@@ -284,13 +279,15 @@ document.getElementById('changePasswordForm').addEventListener('submit', async (
     btn.disabled = true;
     btn.querySelector('span').textContent = 'Modification...';
     try {
-        const res  = await fetch(`${API_URL}/auth/password`, {
+        const res = await fetch(`${API_URL}/auth/password`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authManager.getToken()}` },
             body: JSON.stringify({ currentPassword: currentPwd, newPassword: newPwd })
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Erreur serveur');
+        let data;
+        try { data = await res.json(); }
+        catch { throw new Error(`Erreur serveur (${res.status}) — backend inaccessible ou non déployé`); }
+        if (!res.ok) throw new Error(data.error || `Erreur ${res.status}`);
         msgEl.textContent = '✓ ' + data.message;
         msgEl.className   = 'auth-message auth-message-success';
         msgEl.style.display = 'block';
