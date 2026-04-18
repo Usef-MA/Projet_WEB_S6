@@ -1,0 +1,195 @@
+/* ════════════════════════════════════════════════════════════════
+   OPTIONS — Interface paramètres améliorée
+════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: 
+      radial-gradient(circle at 20% 80%, #2d7a48 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, #1e5c35 0%, transparent 50%),
+      linear-gradient(160deg, #237a48 0%, #165c31 45%, #0f4525 100%);
+    color: #e8f4fd;
+    overflow-x: hidden;
+  }
+  
+  /* ════════════════════════════════════════════════════════════════
+     BOUTON RETOUR EN HAUT À GAUCHE (FIXE)
+  ════════════════════════════════════════════════════════════════ */
+  .back-home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    background: rgba(10, 25, 15, 0.85);
+    border: 1px solid rgba(120, 210, 160, 0.4);
+    color: #e8f4fd;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.3),
+      0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .back-home-btn:hover {
+    background: rgba(20, 50, 30, 0.95);
+    border-color: rgba(120, 210, 160, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  .back-home-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* ════════════════════════════════════════════════════════════════
+     PAGE PRINCIPALE
+  ════════════════════════════════════════════════════════════════ */
+  .options-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  
+  /* ════════════════════════════════════════════════════════════════
+     CARTE OPTIONS
+  ════════════════════════════════════════════════════════════════ */
+  .options-card {
+    width: min(100%, 560px);
+    background: rgba(8, 28, 16, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(120, 210, 160, 0.25);
+    border-radius: 28px;
+    padding: 48px 40px;
+    box-shadow: 
+      0 32px 100px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+  
+  .options-card h1 {
+    margin: 0 0 36px 0;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #e8f4fd, #a0d8b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* ════════════════════════════════════════════════════════════════
+     GROUPES D'OPTIONS
+  ════════════════════════════════════════════════════════════════ */
+  .option-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(120, 210, 160, 0.15);
+    border-radius: 16px;
+    transition: all 0.2s ease;
+  }
+  
+  .option-group:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(120, 210, 160, 0.35);
+    transform: translateY(-1px);
+  }
+  
+  .option-group label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e8f4fd;
+    letter-spacing: 0.01em;
+  }
+  
+  .option-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4ade80;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  
+  .option-group input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    outline: none;
+    appearance: none;
+  }
+  
+  .option-group input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4);
+  }
+  
+  .option-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(74, 222, 128, 0.4);
+  }
+  
+  #volumeValue {
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 50px;
+    color: #a0d8b8;
+  }
+  
+  /* ════════════════════════════════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════════════════════════════════ */
+  @media (max-width: 600px) {
+    .options-page {
+      padding: 20px;
+    }
+  
+    .options-card {
+      padding: 32px 24px;
+      border-radius: 20px;
+    }
+  
+    .option-group {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      padding: 20px;
+    }
+  
+    .option-group input[type="range"] {
+      order: -1;
+    }
+  }

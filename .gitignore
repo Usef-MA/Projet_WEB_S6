@@ -1,0 +1,25 @@
+# Dépendances
+node_modules/
+
+# Variables d'environnement (contiennent des secrets)
+backend/.env
+.env
+.env.local
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Outils IA (ne pas versionner)
+.claude/
+**/.claude/
+.cursor/
+.copilot/
+
+# IDE
+.vscode/settings.json
+*.code-workspace
+
+# Logs
+*.log
+npm-debug.log*

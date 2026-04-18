@@ -1,0 +1,400 @@
+/* ═══════════════════════════════════════════════════════════
+   BILLARD MAROCAIN — Jeu — Thème AARO Gaming
+   Palette : bordeaux #8B0000, or #D4AF37, fond #1a0a00
+═══════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a0a00;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpolygon points='30,2 58,30 30,58 2,30' fill='none' stroke='%23D4AF37' stroke-width='0.8'/%3E%3Cpolygon points='30,14 46,30 30,46 14,30' fill='none' stroke='%23D4AF37' stroke-width='0.4'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(139,26,26,0.18) 0%, transparent 70%);
+  background-size: 60px 60px, 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-family: 'Cinzel', 'Amiri', 'Segoe UI', system-ui, sans-serif;
+  color: #F5E6C8;
+  user-select: none;
+  padding-bottom: 24px;
+}
+
+/* ─── Barre de navigation (topbar) ──────────────────────── */
+#game-topbar {
+  width: 100%;
+  max-width: 940px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+  gap: 12px;
+}
+
+.topbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 44px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.25);
+  border-radius: 4px;
+  color: #D4AF37;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.topbar-btn:hover {
+  background: rgba(212,175,55,0.18);
+  border-color: rgba(212,175,55,0.55);
+  color: #FFD700;
+  transform: translateY(-1px);
+}
+.topbar-btn:active { transform: translateY(0); }
+
+.topbar-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #D4AF37;
+  text-shadow: 0 0 20px rgba(212,175,55,0.4);
+  letter-spacing: 2px;
+  text-align: center;
+  flex: 1;
+}
+
+.topbar-btn--home {
+  background: rgba(139,0,0,0.2);
+  border-color: rgba(212,175,55,0.3);
+}
+.topbar-btn--home:hover {
+  background: rgba(139,0,0,0.4);
+}
+
+/* ─── Conteneur principal ─────────────────────────────────── */
+#game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 940px;
+  padding: 0 16px;
+  transform-origin: top center;
+}
+
+/* ─── HUD parchemin marocain ──────────────────────────────── */
+#hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(135deg, rgba(30,8,0,0.95) 0%, rgba(20,5,0,0.95) 100%);
+  border: 1px solid rgba(212,175,55,0.35);
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.08), 0 4px 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+/* Coins arabesque HUD */
+#hud::before, #hud::after {
+  content: '✦';
+  position: absolute;
+  color: #D4AF37;
+  opacity: 0.4;
+  font-size: 0.7rem;
+}
+#hud::before { top: 5px; left: 8px; }
+#hud::after  { top: 5px; right: 8px; }
+
+#hud .hud-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 100px;
+}
+
+#hud .hud-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: rgba(212,175,55,0.55);
+  letter-spacing: 0.1em;
+}
+
+#hud .hud-value {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #F5E6C8;
+}
+
+#hud .hud-value.active-player { color: #D4AF37; text-shadow: 0 0 10px rgba(212,175,55,0.5); }
+#hud .hud-value.group-solids  { color: #f5c518; }
+#hud .hud-value.group-stripes { color: #c084fc; }
+#hud .hud-value.group-none    { color: rgba(245,230,200,0.4); }
+
+#difficulty-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+#difficulty-badge.easy   { background: rgba(0,80,20,0.6);  border: 1px solid #166534; color: #bbf7d0; }
+#difficulty-badge.medium { background: rgba(80,40,0,0.6);  border: 1px solid #D4AF37; color: #fef08a; }
+#difficulty-badge.hard   { background: rgba(100,0,0,0.6);  border: 1px solid #C41E3A; color: #fecaca; }
+
+/* ─── Canvas — bordure arabesque ─────────────────────────── */
+#game-canvas {
+  display: block;
+  border-radius: 3px;
+  max-width: 100%;
+  cursor: crosshair;
+  box-shadow:
+    0 0 0 4px #3b1a00,
+    0 0 0 6px rgba(212,175,55,0.3),
+    0 0 0 8px #1a0a00,
+    0 12px 50px rgba(0,0,0,0.8),
+    0 0 60px rgba(139,0,0,0.15);
+}
+
+#game-canvas.no-interact { cursor: not-allowed; }
+
+/* ─── Message d'état ──────────────────────────────────────── */
+#status-bar {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 22px;
+  color: rgba(245,230,200,0.7);
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+
+#status-bar.fault   { color: #f87171; }
+#status-bar.success { color: #4ade80; }
+#status-bar.info    { color: #D4AF37; }
+#status-bar.ai      { color: #c084fc; }
+
+/* ─── Overlay de fin de partie ────────────────────────────── */
+#end-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 3, 0, 0.88);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#end-overlay.visible { display: flex; }
+
+#end-card {
+  background: linear-gradient(135deg, rgba(20,5,0,0.97) 0%, rgba(30,10,0,0.97) 100%);
+  border: 1.5px solid rgba(212,175,55,0.4);
+  border-radius: 4px;
+  padding: 48px 56px;
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,0.08),
+    0 24px 80px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  max-width: 90vw;
+}
+
+#end-card::before,
+#end-card::after {
+  content: '✦';
+  position: absolute;
+  color: #D4AF37;
+  opacity: 0.5;
+  font-size: 1rem;
+}
+#end-card::before { top: 12px; left: 16px; }
+#end-card::after  { top: 12px; right: 16px; }
+
+#end-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px currentColor;
+}
+
+#end-title.win  { color: #D4AF37; }
+#end-title.lose { color: #C41E3A; }
+
+#end-subtitle {
+  font-family: 'Amiri', serif;
+  font-size: 17px;
+  color: rgba(245,230,200,0.75);
+}
+
+.end-auth-msg {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: rgba(212,175,55,0.65);
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(212,175,55,0.2);
+  padding: 8px 16px;
+  border-radius: 3px;
+  background: rgba(212,175,55,0.05);
+}
+
+.end-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* ─── Boutons ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  min-height: 48px;
+  border: 1.5px solid rgba(212,175,55,0.4);
+  border-radius: 3px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+}
+.btn:hover::before { left: 160%; }
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, #8B0000 0%, #5c0000 100%);
+  color: #D4AF37;
+  box-shadow: 0 0 20px rgba(139,0,0,0.35);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #a00000 0%, #700000 100%);
+  color: #FFD700;
+  border-color: #D4AF37;
+  box-shadow: 0 0 30px rgba(139,0,0,0.5);
+}
+
+.btn-home-overlay {
+  background: rgba(212,175,55,0.08);
+  color: rgba(212,175,55,0.7);
+  border-color: rgba(212,175,55,0.2);
+}
+.btn-home-overlay:hover {
+  background: rgba(212,175,55,0.16);
+  color: #D4AF37;
+  border-color: rgba(212,175,55,0.45);
+}
+
+/* ─── Indicateur de puissance ─────────────────────────────── */
+#power-bar-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: rgba(212,175,55,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#power-bar-container.visible { opacity: 1; }
+
+#power-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(212,175,55,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(212,175,55,0.15);
+}
+
+#power-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #2E8B57 0%, #D4AF37 60%, #C41E3A 100%);
+  transition: width 0.05s;
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+
+/* Tablette */
+@media (max-width: 960px) {
+  #game-wrapper { padding: 0 10px; }
+  #hud .hud-block { min-width: 80px; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  #hud {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+    justify-content: center;
+  }
+  #hud .hud-block { min-width: 70px; }
+  #hud .hud-label { font-size: 8px; }
+  #hud .hud-value { font-size: 12px; }
+
+  .topbar-title { font-size: 0.9rem; }
+  .topbar-btn   { font-size: 0.7rem; padding: 8px 10px; }
+
+  #end-card { padding: 36px 24px; }
+  .end-buttons { flex-direction: column; gap: 10px; }
+  .btn { min-height: 44px; font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+  .topbar-btn { padding: 6px 8px; font-size: 0.65rem; }
+}

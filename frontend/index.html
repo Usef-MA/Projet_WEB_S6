@@ -15,7 +15,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo" onclick="location.reload()">
-                <img src="assets/images/logo.png" alt="AARO Gaming" class="logo-img">
+                <img src="assets/images/logo.png" alt="USEF" style="height: 44px; width: auto;">
             </a>
 
             <ul class="nav-menu">
@@ -58,7 +58,7 @@
                     </div>
                     <div class="feature-item">
                         <span class="feature-number">02</span>
-                        <span class="feature-text">Classements en ligne et scores sauvegardés</span>
+                        <span class="feature-text">Billard en ligne avec physique réaliste</span>
                     </div>
                     <div class="feature-item">
                         <span class="feature-number">03</span>
@@ -129,37 +129,37 @@
                 </div>
             </div>
 
-            <!-- Jeu 2 : Legends Arise -->
+            <!-- Jeu 2 : Billard Marocain -->
             <div class="game-card" data-game="2">
                 <div class="card-glow"></div>
                 <div class="card-image">
-                    <img src="assets/images/legends-cover.png" alt="Legends Arise" class="game-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="assets/images/billard.png" alt="Billard Marocain" class="game-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                     <div class="game-placeholder game-2" style="display:none">
-                        <div class="game-icon">⚔️</div>
+                        <div class="game-icon">🎱</div>
                     </div>
                 </div>
                 <div class="card-content">
-                    <h3 class="game-title">LEGENDS ARISE</h3>
+                    <h3 class="game-title">BILLARD MAROCAIN</h3>
                     <p class="game-description">
-                        Combattez dans des arènes épiques où seuls les meilleurs survivent.
-                        Maîtrisez des combos dévastateurs et devenez une légende.
+                        Affrontez une IA sur un billard 8-ball aux couleurs de la médina.
+                        Stratégie, précision et physique réaliste pour la victoire.
                     </p>
                     <div class="game-stats">
                         <div class="stat">
                             <span class="stat-label">GENRE</span>
-                            <span class="stat-value">Combat</span>
+                            <span class="stat-value">Jeu de Billard</span>
                         </div>
                         <div class="stat">
                             <span class="stat-label">JOUEURS</span>
-                            <span class="stat-value">1v1 / 2v2</span>
+                            <span class="stat-value">1 vs IA</span>
                         </div>
                     </div>
                     <div class="card-buttons">
-                        <button class="btn-play" data-game-id="legends">
+                        <button class="btn-play" data-game-id="billard" data-game-url="../Billard/menu.html">
                             <span>JOUER</span>
                             <span class="btn-arrow">→</span>
                         </button>
-                        <button class="btn-scores" data-game-id="legends" data-game-name="Legends Arise">
+                        <button class="btn-scores" data-game-id="billard" data-game-name="Billard Marocain">
                             SCORES
                         </button>
                     </div>
@@ -211,22 +211,22 @@
             <h2 class="section-title">CE QU'ON A CONSTRUIT</h2>
             <div class="innovations-grid">
                 <div class="innovation-item">
-                    <div class="innovation-icon">🎮</div>
+                    <div class="innovation-icon"><img src="assets/images/html5canvas.png" alt="HTML5 Canvas" style="width:64px;height:64px;object-fit:contain;"></div>
                     <h3>Jeux en HTML5 Canvas</h3>
                     <p>Des jeux jouables directement dans le navigateur, sans installation, développés en JavaScript vanilla</p>
                 </div>
                 <div class="innovation-item">
-                    <div class="innovation-icon">🔐</div>
+                    <div class="innovation-icon"><img src="assets/images/mongodb.png" alt="MongoDB" style="width:64px;height:64px;object-fit:contain;"></div>
                     <h3>Auth JWT + MongoDB</h3>
                     <p>Système de compte sécurisé avec tokens JWT et base de données MongoDB Atlas dans le cloud</p>
                 </div>
                 <div class="innovation-item">
-                    <div class="innovation-icon">🏆</div>
+                    <div class="innovation-icon"><img src="assets/images/score.png" alt="Score" style="width:64px;height:64px;object-fit:contain;"></div>
                     <h3>Leaderboards en ligne</h3>
                     <p>Les scores sont sauvegardés côté serveur et consultables par tous les joueurs en temps réel</p>
                 </div>
                 <div class="innovation-item">
-                    <div class="innovation-icon">🇲🇦</div>
+                    <div class="innovation-icon"><img src="assets/images/maroc.png" alt="Maroc" style="width:64px;height:64px;object-fit:contain;"></div>
                     <h3>Identité marocaine</h3>
                     <p>Des univers inspirés du Maroc — médina, runner, couleurs chaudes — pour une expérience culturelle unique</p>
                 </div>
@@ -380,6 +380,44 @@
             <div id="leaderboardContent" class="leaderboard-content">
                 <div class="leaderboard-loading">Chargement...</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Mes Scores -->
+    <div id="myScoresModal" class="modal">
+        <div class="modal-content leaderboard-modal">
+            <span class="modal-close" data-modal="myScoresModal">&times;</span>
+            <h3 class="modal-title">🏆 MES SCORES</h3>
+            <div id="myScoresContent" class="leaderboard-content">
+                <div class="leaderboard-loading">Chargement...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Changer Mot de Passe -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content login-modal">
+            <span class="modal-close" data-modal="changePasswordModal">&times;</span>
+            <h3 class="modal-title">🔑 MOT DE PASSE</h3>
+            <div id="changePwdMessage" class="auth-message" style="display:none"></div>
+            <form class="auth-form" id="changePasswordForm">
+                <div class="form-group">
+                    <input type="password" id="currentPassword" required placeholder=" ">
+                    <label for="currentPassword">Mot de passe actuel</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="newPassword" required minlength="6" placeholder=" ">
+                    <label for="newPassword">Nouveau mot de passe</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirmNewPassword" required minlength="6" placeholder=" ">
+                    <label for="confirmNewPassword">Confirmer le nouveau mot de passe</label>
+                </div>
+                <button type="submit" class="btn-submit" id="changePwdBtn">
+                    <span>MODIFIER</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </form>
         </div>
     </div>
 

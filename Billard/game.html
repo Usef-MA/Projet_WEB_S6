@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billard Marocain — AARO Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+<div id="game-wrapper">
+
+  <!-- Barre de navigation -->
+  <div id="game-topbar">
+    <a href="menu.html" id="btn-back" class="topbar-btn">← Menu</a>
+    <span class="topbar-title">🎱 Billard Marocain</span>
+    <a href="../frontend/index.html" id="btn-home" class="topbar-btn topbar-btn--home">🏠 Accueil</a>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-block">
+      <span class="hud-label">Tour</span>
+      <span class="hud-value active-player" id="hud-turn">Joueur</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">Joueur — groupe</span>
+      <span class="hud-value group-none" id="hud-player-group">—</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">Difficulté</span>
+      <span id="difficulty-badge" class="medium">Medium</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">IA — groupe</span>
+      <span class="hud-value group-none" id="hud-ai-group">—</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">Billes restantes</span>
+      <span class="hud-value" id="hud-remaining">15</span>
+    </div>
+  </div>
+
+  <!-- Canvas principal -->
+  <canvas id="game-canvas" width="900" height="500"></canvas>
+
+  <!-- Barre de puissance -->
+  <div id="power-bar-container">
+    <span>Force</span>
+    <div id="power-bar-track">
+      <div id="power-bar-fill"></div>
+    </div>
+    <span id="power-pct">0%</span>
+  </div>
+
+  <!-- Message d'état -->
+  <div id="status-bar" class="info">Chargement…</div>
+
+</div>
+
+<!-- Overlay fin de partie -->
+<div id="end-overlay">
+  <div id="end-card">
+    <div id="end-title" class="win">Vous gagnez !</div>
+    <div id="end-subtitle">Partie terminée</div>
+    <div id="end-auth-msg" class="end-auth-msg" style="display:none">
+      🔐 Connecte-toi sur AARO pour sauvegarder ton score
+    </div>
+    <div class="end-buttons">
+      <button class="btn btn-primary" id="btn-replay">🔄 Rejouer</button>
+      <a class="btn btn-home-overlay" href="../frontend/index.html">🏠 Accueil</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/audioManager.js"></script>
+<script src="js/scoreManager.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

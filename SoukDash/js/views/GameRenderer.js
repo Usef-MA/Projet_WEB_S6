@@ -733,9 +733,6 @@ export default class GameRenderer {
         }
 
         if (img) {
-            // ── Image : clearRect pour supprimer tout fond blanc ──
-            ctx.clearRect(drawX, drawY, drawW, drawH);
-            ctx.globalCompositeOperation = 'source-over';
             ctx.drawImage(img, drawX, drawY, drawW, drawH);
         } else {
             // ── Fallback : rectangle coloré + emoji ──
@@ -780,8 +777,6 @@ export default class GameRenderer {
         ctx.save();
 
         if (img) {
-            ctx.clearRect(px, py, size, size);
-            ctx.globalCompositeOperation = 'source-over';
             ctx.drawImage(img, px, py, size, size);
         } else {
             // Silhouette djellaba

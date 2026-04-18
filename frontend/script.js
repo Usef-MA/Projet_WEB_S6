@@ -172,30 +172,139 @@ if (exploreBtn) exploreBtn.addEventListener('click', () => openModal('videoModal
 // NAV AUTH : bouton login / compte
 // ===================================
 
+let _dropdownOutsideHandler = null;
+
 function updateNavAuth() {
     const navAuth = document.getElementById('navAuth');
     if (!navAuth) return;
 
+    if (_dropdownOutsideHandler) {
+        document.removeEventListener('click', _dropdownOutsideHandler);
+        _dropdownOutsideHandler = null;
+    }
+
     if (authManager.isLoggedIn()) {
         const user = authManager.getCurrentUser();
+        const initials = (user.prenom[0] + user.nom[0]).toUpperCase();
         navAuth.innerHTML = `
-            <div class="user-menu">
-                <span class="user-name">${user.prenom.toUpperCase()} ${user.nom.toUpperCase()}</span>
-                <button class="btn-logout" id="btnLogout">DÉCONNEXION</button>
+            <div class="user-dropdown" id="userDropdown">
+                <button class="user-trigger" id="userTrigger">
+                    <span class="user-initials">${initials}</span>
+                    <span>${user.prenom.toUpperCase()} ${user.nom.toUpperCase()}</span>
+                    <span class="dropdown-caret">▾</span>
+                </button>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item" id="btnChangePassword">🔑 Modifier mon mot de passe</button>
+                    <button class="dropdown-item" id="btnMyScores">🏆 Mes scores</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item dropdown-item--danger" id="btnLogout">🚪 Se déconnecter</button>
+                </div>
             </div>
         `;
+        document.getElementById('userTrigger').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('userDropdown').classList.toggle('open');
+        });
+        document.getElementById('btnChangePassword').addEventListener('click', () => {
+            document.getElementById('userDropdown').classList.remove('open');
+            document.getElementById('changePasswordForm').reset();
+            document.getElementById('changePwdMessage').style.display = 'none';
+            openModal('changePasswordModal');
+        });
+        document.getElementById('btnMyScores').addEventListener('click', () => {
+            document.getElementById('userDropdown').classList.remove('open');
+            openMyScoresModal();
+        });
         document.getElementById('btnLogout').addEventListener('click', () => {
             authManager.logout();
             updateNavAuth();
             showNotification('Vous êtes déconnecté', 'info');
         });
+        _dropdownOutsideHandler = () => {
+            const dd = document.getElementById('userDropdown');
+            if (dd) dd.classList.remove('open');
+        };
+        document.addEventListener('click', _dropdownOutsideHandler);
     } else {
         navAuth.innerHTML = `<button class="btn-login" id="btnLogin">SE CONNECTER</button>`;
-        document.getElementById('btnLogin').addEventListener('click', () => {
-            showAuthModal('login');
-        });
+        document.getElementById('btnLogin').addEventListener('click', () => showAuthModal('login'));
     }
 }
+
+// ===================================
+// MES SCORES
+// ===================================
+
+const GAME_LABELS = { marocrunner: 'Maroc Runner', soukdash: 'Souk Dash', billard: 'Billard Marocain' };
+
+async function openMyScoresModal() {
+    document.getElementById('myScoresContent').innerHTML = '<div class="leaderboard-loading">Chargement...</div>';
+    openModal('myScoresModal');
+    try {
+        const res  = await fetch(`${API_URL}/scores/me`, {
+            headers: { 'Authorization': `Bearer ${authManager.getToken()}` }
+        });
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+            document.getElementById('myScoresContent').innerHTML =
+                '<p class="leaderboard-empty">Aucun score enregistré pour le moment.</p>';
+            return;
+        }
+        let html = `<table class="leaderboard-table"><thead><tr><th>Jeu</th><th>Meilleur score</th><th>Parties</th></tr></thead><tbody>`;
+        data.forEach(entry => {
+            const label = GAME_LABELS[entry.jeu] || entry.jeu;
+            html += `<tr><td>${label}</td><td class="score-cell">${entry.bestScore.toLocaleString()}</td><td style="color:var(--text-muted);text-align:center">${entry.count}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('myScoresContent').innerHTML = html;
+    } catch {
+        document.getElementById('myScoresContent').innerHTML =
+            '<p class="leaderboard-empty">Impossible de charger vos scores.</p>';
+    }
+}
+
+// ===================================
+// CHANGER MOT DE PASSE
+// ===================================
+
+document.getElementById('changePasswordForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn            = document.getElementById('changePwdBtn');
+    const currentPwd     = document.getElementById('currentPassword').value;
+    const newPwd         = document.getElementById('newPassword').value;
+    const confirmPwd     = document.getElementById('confirmNewPassword').value;
+    const msgEl          = document.getElementById('changePwdMessage');
+
+    if (newPwd !== confirmPwd) {
+        msgEl.textContent = 'Les mots de passe ne correspondent pas';
+        msgEl.className   = 'auth-message auth-message-error';
+        msgEl.style.display = 'block';
+        return;
+    }
+    btn.disabled = true;
+    btn.querySelector('span').textContent = 'Modification...';
+    try {
+        const res  = await fetch(`${API_URL}/auth/password`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authManager.getToken()}` },
+            body: JSON.stringify({ currentPassword: currentPwd, newPassword: newPwd })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Erreur serveur');
+        msgEl.textContent = '✓ ' + data.message;
+        msgEl.className   = 'auth-message auth-message-success';
+        msgEl.style.display = 'block';
+        document.getElementById('changePasswordForm').reset();
+        setTimeout(() => closeModal('changePasswordModal'), 1800);
+    } catch (err) {
+        msgEl.textContent = err.message;
+        msgEl.className   = 'auth-message auth-message-error';
+        msgEl.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'MODIFIER';
+    }
+});
 
 function showAuthModal(mode) {
     const loginForm    = document.getElementById('loginForm');
@@ -307,7 +416,7 @@ document.querySelectorAll('.btn-play').forEach(button => {
         const gameId  = button.dataset.gameId;
         const gameUrl = button.dataset.gameUrl;
 
-        const gamesWithUrl = ['marocrunner', 'soukdash'];
+        const gamesWithUrl = ['marocrunner', 'soukdash', 'billard'];
 
         if (gamesWithUrl.includes(gameId) && gameUrl) {
             // Passer le token au jeu via sessionStorage

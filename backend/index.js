@@ -157,5 +157,42 @@ app.get("/scores/:jeu", async (req, res) => {
     }
 });
 
+// Scores personnels : meilleur score par jeu pour l'utilisateur connecté
+app.get("/scores/me", authRequired, async (req, res) => {
+    try {
+        const scores = await Score.aggregate([
+            { $match: { user_id: new mongoose.Types.ObjectId(req.user.id) } },
+            { $group: { _id: "$jeu", bestScore: { $max: "$score" }, count: { $sum: 1 } } },
+            { $sort: { bestScore: -1 } },
+            { $project: { _id: 0, jeu: "$_id", bestScore: 1, count: 1 } }
+        ]);
+        res.json(scores);
+    } catch (err) {
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
+// Changer le mot de passe
+app.put("/auth/password", authRequired, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ error: "Tous les champs sont requis" });
+        }
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: "Nouveau mot de passe trop court (min. 6 caractères)" });
+        }
+        const user = await User.findById(req.user.id);
+        if (!user || !(await bcrypt.compare(currentPassword, user.password))) {
+            return res.status(401).json({ error: "Mot de passe actuel incorrect" });
+        }
+        user.password = await bcrypt.hash(newPassword, 12);
+        await user.save();
+        res.json({ message: "Mot de passe modifié avec succès" });
+    } catch (err) {
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(port, () => console.log(`🚀 Serveur sur le port ${port}`));

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billard Marocain — Niveau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/difficulty.css" />
+</head>
+<body>
+
+  <div id="balls-bg" aria-hidden="true"></div>
+
+  <a href="menu.html" class="back-btn">← Retour</a>
+
+  <main class="diff-page">
+    <section class="diff-card">
+
+      <p class="diff-label">Choisir le niveau de l'adversaire</p>
+      <h1 class="diff-title">🎱 Difficulté</h1>
+
+      <div class="diff-levels">
+
+        <button class="level-btn level-easy" data-level="easy" onclick="selectDifficulty('easy')">
+          <span class="level-icon">🟢</span>
+          <span class="level-name">Facile</span>
+          <span class="level-desc">L'IA vise aléatoirement avec de l'imprécision</span>
+        </button>
+
+        <button class="level-btn level-medium" data-level="medium" onclick="selectDifficulty('medium')">
+          <span class="level-icon">🟡</span>
+          <span class="level-name">Moyen</span>
+          <span class="level-desc">L'IA cible la bille la plus proche avec légère erreur</span>
+        </button>
+
+        <button class="level-btn level-hard" data-level="hard" onclick="selectDifficulty('hard')">
+          <span class="level-icon">🔴</span>
+          <span class="level-name">Difficile</span>
+          <span class="level-desc">L'IA calcule l'angle optimal vers le meilleur trou</span>
+        </button>
+
+      </div>
+
+      <p class="diff-hint" id="diff-hint">Appuyez sur un niveau pour lancer la partie</p>
+
+    </section>
+  </main>
+
+  <script src="js/menu.js"></script>
+  <script>
+    const LEVELS = { easy: 'Facile', medium: 'Moyen', hard: 'Difficile' };
+
+    function selectDifficulty(level) {
+      localStorage.setItem('billardDifficulty', level);
+      // Feedback visuel bref puis redirect
+      document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelector(`[data-level="${level}"]`).classList.add('selected');
+      document.getElementById('diff-hint').textContent =
+        `Niveau ${LEVELS[level]} sélectionné — lancement…`;
+      setTimeout(() => { window.location.href = 'game.html'; }, 350);
+    }
+
+    // Mettre en évidence la sélection actuelle
+    const current = localStorage.getItem('billardDifficulty') || 'medium';
+    const activeBtn = document.querySelector(`[data-level="${current}"]`);
+    if (activeBtn) activeBtn.classList.add('current');
+    document.getElementById('diff-hint').textContent =
+      `Niveau actuel : ${LEVELS[current]} — cliquez pour changer ou confirmer`;
+
+    // Touche H → accueil AARO
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'h' || e.key === 'H') window.location.href = '../frontend/index.html';
+    });
+  </script>
+</body>
+</html>

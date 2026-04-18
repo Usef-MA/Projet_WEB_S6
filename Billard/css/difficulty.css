@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════
+   BILLARD MAROCAIN — Difficulty — Thème AARO Gaming
+   Palette : bordeaux #8B0000, or #D4AF37, fond #1a0a00
+═══════════════════════════════════════════════════════════ */
+
+body {
+  background-color: #1a0a00;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpolygon points='30,2 58,30 30,58 2,30' fill='none' stroke='%23D4AF37' stroke-width='0.8'/%3E%3Cpolygon points='30,14 46,30 30,46 14,30' fill='none' stroke='%23D4AF37' stroke-width='0.4'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(139,26,26,0.22) 0%, transparent 70%),
+    linear-gradient(160deg, #2a0e00 0%, #1a0a00 50%, #0f0500 100%);
+  background-size: 60px 60px, 100% 100%, 100% 100%;
+  font-family: 'Cinzel', Georgia, serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* ─── Bouton retour ─────────────────────────────────────── */
+.back-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(212,175,55,0.12);
+  border: 1.5px solid rgba(212,175,55,0.4);
+  border-radius: 6px;
+  color: #D4AF37;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+.back-btn:hover {
+  background: rgba(212,175,55,0.25);
+  border-color: rgba(212,175,55,0.7);
+  color: #FFD700;
+  transform: translateY(-2px);
+}
+
+/* ─── Boules décoratives ────────────────────────────────── */
+#balls-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.35;
+}
+
+.deco-ball {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,0.6),
+    inset 4px 4px 12px rgba(255,255,255,0.15);
+  animation: floatBall linear infinite;
+}
+
+@keyframes floatBall {
+  from { transform: translate(-50%, -50%) translateY(0); }
+  50%  { transform: translate(-50%, -50%) translateY(-18px); }
+  to   { transform: translate(-50%, -50%) translateY(0); }
+}
+
+/* ─── Page principale ───────────────────────────────────── */
+.diff-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* ─── Carte principale ──────────────────────────────────── */
+.diff-card {
+  position: relative;
+  background: linear-gradient(145deg, #2a0a00 0%, #1a0500 60%, #220800 100%);
+  border: 2px solid rgba(212,175,55,0.35);
+  border-radius: 16px;
+  padding: 2.5rem 2.5rem 2rem;
+  width: min(520px, 100%);
+  box-shadow:
+    0 0 60px rgba(139,0,0,0.3),
+    0 0 120px rgba(139,0,0,0.1),
+    inset 0 1px 0 rgba(212,175,55,0.15);
+  text-align: center;
+}
+
+/* Coins arabesque */
+.diff-card::before,
+.diff-card::after {
+  content: '✦';
+  position: absolute;
+  font-size: 1.1rem;
+  color: rgba(212,175,55,0.4);
+  line-height: 1;
+}
+.diff-card::before { top: 12px; left: 16px; }
+.diff-card::after  { top: 12px; right: 16px; }
+
+/* ─── Label et titre ────────────────────────────────────── */
+.diff-label {
+  color: rgba(212,175,55,0.65);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.diff-title {
+  color: #D4AF37;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0 0 1.8rem;
+  text-shadow: 0 0 24px rgba(212,175,55,0.4);
+}
+
+/* ─── Séparateur or ─────────────────────────────────────── */
+.diff-card > .diff-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  margin: 0.8rem auto 0;
+  border-radius: 1px;
+}
+
+/* ─── Conteneur boutons ─────────────────────────────────── */
+.diff-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── Bouton niveau ─────────────────────────────────────── */
+.level-btn {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.4rem;
+  background: rgba(255,255,255,0.03);
+  border: 1.5px solid rgba(212,175,55,0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.level-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+.level-btn:hover::before { opacity: 1; }
+
+.level-btn:hover {
+  border-color: rgba(212,175,55,0.5);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(139,0,0,0.3);
+}
+
+/* ─── Icône niveau ──────────────────────────────────────── */
+.level-icon {
+  grid-row: 1 / 3;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Nom du niveau ─────────────────────────────────────── */
+.level-name {
+  color: #D4AF37;
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ─── Description ───────────────────────────────────────── */
+.level-desc {
+  color: rgba(212,175,55,0.55);
+  font-family: Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+  margin-top: 3px;
+}
+
+/* ─── État sélectionné ──────────────────────────────────── */
+.level-btn.selected,
+.level-btn.current {
+  border-color: rgba(212,175,55,0.7);
+  background: rgba(212,175,55,0.08);
+  box-shadow: 0 0 20px rgba(212,175,55,0.15), 0 4px 20px rgba(139,0,0,0.3);
+}
+.level-btn.selected .level-name,
+.level-btn.current .level-name {
+  color: #FFD700;
+  text-shadow: 0 0 12px rgba(255,215,0,0.4);
+}
+
+/* Variantes couleur par niveau */
+.level-easy:hover   { border-color: rgba(100,200,100,0.5); }
+.level-medium:hover { border-color: rgba(240,200,60,0.5); }
+.level-hard:hover   { border-color: rgba(200,60,60,0.5); }
+
+.level-easy.selected,  .level-easy.current   { border-color: rgba(100,200,100,0.6); background: rgba(100,200,100,0.07); }
+.level-medium.selected,.level-medium.current { border-color: rgba(240,200,60,0.6); background: rgba(240,200,60,0.07); }
+.level-hard.selected,  .level-hard.current   { border-color: rgba(200,60,60,0.6);  background: rgba(200,60,60,0.07); }
+
+/* ─── Hint texte ────────────────────────────────────────── */
+.diff-hint {
+  color: rgba(212,175,55,0.5);
+  font-size: 0.72rem;
+  font-family: Georgia, serif;
+  letter-spacing: 0.5px;
+  margin: 0;
+  min-height: 1.2em;
+  transition: color 0.3s;
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .diff-card {
+    padding: 2rem 1.2rem 1.5rem;
+  }
+  .level-btn {
+    padding: 0.85rem 1rem;
+  }
+}
