@@ -4,7 +4,7 @@
 
 const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:4000"
-    : "https://aaro-gaming-backend.onrender.com"; // ← remplacer par l'URL Render après déploiement
+    : "https://projet-web-s6.onrender.com";
 
 // ===================================
 // STARRY SKY BACKGROUND

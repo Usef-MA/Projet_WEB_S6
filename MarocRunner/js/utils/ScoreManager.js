@@ -1,7 +1,7 @@
 // Gestion des scores — localStorage pour le high score local + envoi API
 const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:4000"
-    : "https://aaro-gaming-backend.onrender.com"; // ← même URL que script.js
+    : "https://projet-web-s6.onrender.com";
 
 export default class ScoreManager {
     constructor() {

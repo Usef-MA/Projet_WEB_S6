@@ -3,7 +3,7 @@
 
 const _BILLARD_API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:4000'
-    : 'https://aaro-gaming-backend.onrender.com';
+    : 'https://projet-web-s6.onrender.com';
 
 const _BILLARD_GAME_ID = 'billard';
 const _BILLARD_LS_KEY  = 'billardHighScore';

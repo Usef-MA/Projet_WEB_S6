@@ -5,7 +5,7 @@
 
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:4000'
-    : 'https://aaro-gaming-backend.onrender.com';
+    : 'https://projet-web-s6.onrender.com';
 
 const GAME_ID = 'soukdash'; // identifiant du jeu côté base de données
 
